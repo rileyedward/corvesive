@@ -1,15 +1,14 @@
 services:
   db:
     image: postgres:15
-    restart: on-failure
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -20,7 +19,7 @@ services:
     working_dir: /app
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://postgres:password@db:5432/db
+      - DATABASE_URL=postgresql://postgres:password@localhost:5432/db
     volumes:
       - .:/app
     ports:
@@ -30,3 +29,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+volumes:
+  postgres_data:
