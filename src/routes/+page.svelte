@@ -1,1 +1,1 @@
-<h1>Ripcord</h1>
+<h1 class="text-3xl">Ripcord</h1>
