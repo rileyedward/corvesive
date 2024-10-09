@@ -1,7 +1,7 @@
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
-	// TODO: Register Action
+	// TODO: Login Action
 	default: async () => {
 		return {
 			message: 'This is the default action'
