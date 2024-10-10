@@ -5,8 +5,8 @@ import type { Actions } from '@sveltejs/kit';
 export const actions = {
 	default: async ({ request, cookies }) => {
 		const form = await request.formData();
-		const data = Object.fromEntries(form) as TLoginRequest;
+		const payload = Object.fromEntries(form) as TLoginRequest;
 
-		return Login(data, cookies);
+		return Login(payload, cookies);
 	}
 } satisfies Actions;
