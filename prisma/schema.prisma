@@ -19,7 +19,7 @@ model users {
 
 model tokens {
   id         Int       @id @default(autoincrement())
-  user_id    Int
+  user_id    Int       @unique
   token      String    @unique
   created_at DateTime  @default(now())
   expires_at DateTime?
