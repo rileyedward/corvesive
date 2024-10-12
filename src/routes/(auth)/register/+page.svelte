@@ -5,8 +5,8 @@
 </script>
 
 <div>
-	{JSON.stringify(form)}
 	<form
+		class="space-y-4"
 		method="POST"
 		use:enhance={() => {
 			return async ({ result, update }) => {
@@ -18,31 +18,35 @@
 			};
 		}}
 	>
-		<div>
-			<label for="first_name">First Name</label>
-			<input type="text" name="first_name" />
-		</div>
+		<div class="w-full flex justify-between items-center gap-2">
+			<div class="w-full">
+				<label for="first_name">First Name</label>
+				<input type="text" name="first_name" class="w-full" />
+			</div>
 
-		<div>
-			<label for="last_name">Last Name</label>
-			<input type="text" name="last_name" />
+			<div class="w-full">
+				<label for="last_name">Last Name</label>
+				<input type="text" name="last_name" class="w-full" />
+			</div>
 		</div>
 
 		<div>
 			<label for="email">Email</label>
-			<input type="email" name="email" />
+			<input type="email" name="email" class="w-full" />
 		</div>
 
 		<div>
 			<label for="password">Password</label>
-			<input type="password" name="password" />
+			<input type="password" name="password" class="w-full" />
 		</div>
 
 		<div>
 			<label for="password_confirm">Confirm Password</label>
-			<input type="password" name="password_confirm" />
+			<input type="password" name="password_confirm" class="w-full" />
 		</div>
 
-		<button type="submit">Register</button>
+		<div class="flex justify-end">
+			<button type="submit" class="btn btn-primary">Register</button>
+		</div>
 	</form>
 </div>
