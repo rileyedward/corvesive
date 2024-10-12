@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { updated } from '$app/stores';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 </script>
@@ -9,10 +10,12 @@
 	<form
 		method="POST"
 		use:enhance={() => {
-			return async ({ result }) => {
+			return async ({ result, update }) => {
 				if (result.type === 'success') {
 					alert('SUCCESS');
 				}
+
+				update();
 			};
 		}}
 	>
