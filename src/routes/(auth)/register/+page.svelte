@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import FormErrors from '$lib/components/FormErrors.svelte';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
 </script>
@@ -44,6 +45,8 @@
 			<label for="password_confirm">Confirm Password</label>
 			<input type="password" name="password_confirm" class="w-full" />
 		</div>
+
+		<FormErrors {form} />
 
 		<div class="flex justify-end gap-2">
 			<a href="/login" class="btn btn-secondary">Login</a>
