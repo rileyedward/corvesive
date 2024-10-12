@@ -45,7 +45,8 @@
 			<input type="password" name="password_confirm" class="w-full" />
 		</div>
 
-		<div class="flex justify-end">
+		<div class="flex justify-end gap-2">
+			<a href="/login" class="btn btn-secondary">Login</a>
 			<button type="submit" class="btn btn-primary">Register</button>
 		</div>
 	</form>

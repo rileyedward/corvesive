@@ -25,10 +25,11 @@
 
 		<div>
 			<label for="password">Password</label>
-			<input type="email" name="email" class="w-full" />
+			<input type="password" name="password" class="w-full" />
 		</div>
 
-		<div class="flex justify-end">
+		<div class="flex justify-end gap-2">
+			<a href="/register" class="btn btn-secondary">Register</a>
 			<button type="submit" class="btn btn-primary">Login</button>
 		</div>
 	</form>

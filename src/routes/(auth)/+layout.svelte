@@ -1,6 +1,8 @@
-<div class="max-w-2xl mx-auto px-4">
-	<h1 class="text-3xl text-center mb-2">Corvesive</h1>
-	<div class="border border-black rounded-md p-2">
+<div class="max-w-lg mx-auto px-4 py-6">
+	<header class="text-center mb-4">
+		<h1 class="text-3xl">Corvesive</h1>
+	</header>
+	<main class="border border-gray-300 rounded-lg p-6 shadow-sm bg-white">
 		<slot />
-	</div>
+	</main>
 </div>
