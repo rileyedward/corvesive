@@ -12,18 +12,8 @@
 				or <a href="/register" class="text-blue-600 hover:underline">Register</a> in the meantime.
 			</p>
 			<div class="flex justify-center space-x-4">
-				<a
-					href="/login"
-					class="px-6 py-2 rounded-full border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
-				>
-					Log In
-				</a>
-				<a
-					href="/register"
-					class="px-6 py-2 rounded-full border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-colors"
-				>
-					Register
-				</a>
+				<a href="/login" class="btn btn-primary"> Log In </a>
+				<a href="/register" class="btn btn-secondary"> Register </a>
 			</div>
 		</div>
 	</div>

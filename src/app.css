@@ -6,3 +6,34 @@ html,
 body {
 	font-family: 'JetBrains Mono', monospace;
 }
+
+/* Buttons */
+.btn {
+	@apply px-5 py-2.5 rounded-full inline-flex items-center justify-center transition-all duration-200 ease-in-out;
+}
+
+.btn-primary {
+	@apply bg-black text-white;
+}
+
+.btn-primary:hover {
+	@apply bg-gray-700 shadow-xl transform scale-105;
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+	@apply ring-2 ring-gray-400;
+}
+
+.btn-secondary {
+	@apply bg-white text-black border border-gray-300;
+}
+
+.btn-secondary:hover {
+	@apply bg-gray-100 shadow-lg transform scale-105;
+}
+
+.btn-secondary:focus,
+.btn-secondary:active {
+	@apply ring-2 ring-gray-400;
+}
