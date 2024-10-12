@@ -1,10 +1,10 @@
+import type { users } from '@prisma/client';
+
 declare global {
 	namespace App {
-		// interface Error {}
-		// interface Locals {}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
+		interface Locals {
+			user: users;
+		}
 	}
 }
 
