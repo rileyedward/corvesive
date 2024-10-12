@@ -24,3 +24,15 @@ model tokens {
   created_at DateTime  @default(now())
   expires_at DateTime?
 }
+
+model paystubs {
+  id                      Int      @id @default(autoincrement())
+  user_id                 Int
+  issuer                  String
+  amount_in_cents         Int
+  recurrence_rate         String
+  recurrence_interval_one Int
+  recurrence_interval_two Int
+  created_at              DateTime @default(now())
+  updated_at              DateTime @default(now()) @updatedAt
+}
