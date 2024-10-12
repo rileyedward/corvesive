@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../styles/app.css';
+	import '../app.css';
 	import '../styles/buttons.css';
 </script>
 
