@@ -6,6 +6,8 @@
 </script>
 
 <div>
+	<h4 class="text-center text-2xl mb-4">Get started!</h4>
+
 	<form
 		class="space-y-4"
 		method="POST"
