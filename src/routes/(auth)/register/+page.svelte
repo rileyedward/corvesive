@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import FormErrors from '$lib/components/FormErrors.svelte';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
@@ -14,7 +15,7 @@
 		use:enhance={() => {
 			return async ({ result, update }) => {
 				if (result.type === 'success') {
-					alert('SUCCESS');
+					return goto('/dashboard');
 				}
 
 				update();
