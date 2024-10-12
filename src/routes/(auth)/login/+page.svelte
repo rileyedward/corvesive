@@ -9,7 +9,7 @@
 	<form
 		method="POST"
 		use:enhance={() => {
-			return async ({ result, update }) => {
+			return async ({ result }) => {
 				if (result.type === 'success') {
 					alert('SUCCESS');
 				}
