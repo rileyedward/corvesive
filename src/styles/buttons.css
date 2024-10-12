@@ -1,13 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-	font-family: 'JetBrains Mono', monospace;
-}
-
-/* Buttons */
 .btn {
 	@apply px-5 py-2.5 rounded-full inline-flex items-center justify-center transition-all duration-200 ease-in-out;
 }
