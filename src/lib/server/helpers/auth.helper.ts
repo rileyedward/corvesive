@@ -7,7 +7,7 @@ export async function generateToken(user: users, cookies: Cookies): Promise<void
 	const secret = 'secret';
 	const token = jwt.sign({ user }, secret, { expiresIn: '1h' });
 
-	cookies.set('ripcord_token', token, { path: '/' });
+	cookies.set('corvesive_token', token, { path: '/' });
 
 	await prisma.tokens.upsert({
 		where: { user_id: user.id },
