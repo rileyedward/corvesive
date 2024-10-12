@@ -25,7 +25,7 @@
 					<li>
 						<a
 							{href}
-							class={`text-sm font-semibold text-gray-500 hover:text-black`}
+							class={`text-sm font-semibold ${$page.url.pathname === href ? 'text-black' : 'text-gray-500'} hover:text-black`}
 							aria-label={name}
 						>
 							{name}
