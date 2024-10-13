@@ -13,6 +13,9 @@ export const load = async ({ locals, depends }) => {
 	});
 
 	const upcomingPaystubs = await prisma.paystub_records.findMany({
+		include: {
+			paystub: true
+		},
 		where: {
 			user_id: user.id,
 			pay_date: {
