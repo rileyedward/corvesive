@@ -1,7 +1,8 @@
 import prisma from '$lib/server/database/db';
 import { PaystubFactory } from '$lib/server/database/factories/PaystubFactory';
+import { scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
 
-async function seedDatabase() {
+export async function DatabaseSeeder() {
 	try {
 		const user = await prisma.users.create({
 			data: {
@@ -12,15 +13,12 @@ async function seedDatabase() {
 			}
 		});
 
-		console.log('User created:', user);
-
 		const paystub = await PaystubFactory(user, 'semi-monthly');
-		console.log('Paystub created:', paystub);
+
+		await scheduleFuturePaystubs(paystub);
 	} catch (error) {
 		console.error('Error seeding database:', error);
 	} finally {
 		await prisma.$disconnect();
 	}
 }
-
-seedDatabase();
