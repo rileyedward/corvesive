@@ -12,8 +12,8 @@
 	let recurrence_rate: 'weekly' | 'bi-weekly' | 'monthly' | 'semi-monthly' = 'weekly';
 </script>
 
-<div>
-	<div class="max-w-lg">
+<div class="flex flex-col md:flex-row justify-between items-start gap-4">
+	<div class="w-full md:w-3/4">
 		<div class="flex justify-between items-center mb-6">
 			<h1 class="text-2xl font-semibold">Paystubs</h1>
 			<button
@@ -47,6 +47,11 @@
 		{:else}
 			<p class="text-gray-500 text-sm">Create a new paystub to get started.</p>
 		{/if}
+	</div>
+
+	<div class="w-full md:w-1/3 bg-white p-4 rounded-lg shadow-sm">
+		<h4 class="text-lg font-semibold mb-4">Upcoming</h4>
+		<p class="text-gray-500 text-sm">No upcoming paystubs scheduled.</p>
 	</div>
 </div>
 
