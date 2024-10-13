@@ -5,6 +5,7 @@
 	import type { expense_records, expenses } from '@prisma/client';
 	import type { ActionData } from './$types.js';
 	import UpdateExpenseForm from '$lib/components/expenses/UpdateExpenseForm.svelte';
+	import ExpenseRecordForm from '$lib/components/expenses/ExpenseRecordForm.svelte';
 
 	export let data;
 	export let form: ActionData;
@@ -73,7 +74,7 @@
 						</p>
 						<p class="text-sm text-gray-700">
 							{upcomingExpense.expense.issuer} ({upcomingExpense.expense.name}) - {CentsToDollarsPretty(
-								upcomingExpense.expense.amount_in_cents
+								upcomingExpense.amount_in_cents
 							)}
 						</p>
 					</button>
@@ -86,7 +87,7 @@
 {#if expenseToUpdate}
 	<UpdateExpenseForm {form} bind:showForm bind:expense={expenseToUpdate} />
 {:else if expenseRecordToUpdate}
-	<h1>TODO:</h1>
+	<ExpenseRecordForm {form} bind:showForm bind:expenseRecord={expenseRecordToUpdate} />
 {:else}
 	<CreateExpenseForm {form} bind:showForm />
 {/if}

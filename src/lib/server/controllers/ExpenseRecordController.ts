@@ -74,6 +74,7 @@ export async function UpdateExpenseRecord(
 	expense_record_id: number,
 	user_id: number
 ): Promise<TApiResponse> {
+	console.log('testing');
 	const validationErrors = UpdateExpenseRequest(payload);
 	if (validationErrors.length) {
 		return ValidationErrors(validationErrors);
@@ -95,6 +96,7 @@ export async function UpdateExpenseRecord(
 			id: expenseRecord.id
 		},
 		data: {
+			due_date: new Date(payload.due_date),
 			amount_in_cents: payload.amount_in_cents
 		}
 	});
