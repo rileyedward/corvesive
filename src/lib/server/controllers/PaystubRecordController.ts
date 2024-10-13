@@ -34,7 +34,7 @@ export async function ReschedulePaystub(
 			id: paystubRecord.id
 		},
 		data: {
-			pay_day: payload.pay_day
+			pay_date: payload.pay_date
 		}
 	});
 

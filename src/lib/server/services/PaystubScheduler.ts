@@ -21,7 +21,7 @@ export async function removeFuturePaystubs(paystub: paystubs) {
 	await prisma.paystub_records.deleteMany({
 		where: {
 			paystub_id: paystub.id,
-			pay_day: {
+			pay_date: {
 				gte: new Date()
 			}
 		}
@@ -36,7 +36,7 @@ async function generateMonthlyPaystubs(paystub: paystubs) {
 			data: {
 				user_id: paystub.user_id,
 				paystub_id: paystub.id,
-				pay_day: payDate,
+				pay_date: payDate,
 				amount_in_cents: paystub.amount_in_cents
 			}
 		});
@@ -48,7 +48,7 @@ async function generateMonthlyPaystubs(paystub: paystubs) {
 				data: {
 					user_id: paystub.user_id,
 					paystub_id: paystub.id,
-					pay_day: dayjs(payDate).add(14, 'day').toDate(),
+					pay_date: dayjs(payDate).add(14, 'day').toDate(),
 					amount_in_cents: paystub.amount_in_cents
 				}
 			});
@@ -68,7 +68,7 @@ async function generateWeeklyPaystubs(paystub: paystubs) {
 			data: {
 				user_id: paystub.user_id,
 				paystub_id: paystub.id,
-				pay_day: payDate,
+				pay_date: payDate,
 				amount_in_cents: paystub.amount_in_cents
 			}
 		});

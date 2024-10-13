@@ -10,7 +10,7 @@ export type TPaystubRequest = {
 };
 
 export type TReschedulePaystubRequest = {
-	pay_day: Date;
+	pay_date: Date;
 };
 
 export type TUpdatePaystubRequest = {
@@ -26,7 +26,7 @@ export const PaystubSchema = z.object({
 });
 
 export const ReschedulePaystubSchema = z.object({
-	pay_day: z.date()
+	pay_date: z.date()
 });
 
 export const UpdatePaystubSchema = z.object({

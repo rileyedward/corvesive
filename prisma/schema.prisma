@@ -19,6 +19,8 @@ model users {
   tokens          tokens?
   paystubs        paystubs[]
   paystub_records paystub_records[]
+  expenses        expenses[]
+  expense_records expense_records[]
 }
 
 model tokens {
@@ -50,11 +52,39 @@ model paystub_records {
   id              Int      @id @default(autoincrement())
   user_id         Int
   paystub_id      Int
-  pay_day         DateTime
+  pay_date        DateTime
   amount_in_cents Int
   created_at      DateTime @default(now())
   updated_at      DateTime @default(now()) @updatedAt
 
   user    users    @relation(fields: [user_id], references: [id])
   paystub paystubs @relation(fields: [paystub_id], references: [id])
+}
+
+model expenses {
+  id               Int      @id @default(autoincrement())
+  user_id          Int
+  issuer           String
+  name             String
+  due_day_of_month Int
+  amount_in_cents  Int
+  is_variable      Boolean  @default(false)
+  created_at       DateTime @default(now())
+  updated_at       DateTime @default(now()) @updatedAt
+
+  user            users             @relation(fields: [user_id], references: [id])
+  expense_records expense_records[]
+}
+
+model expense_records {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  expense_id      Int
+  due_date        DateTime
+  amount_in_cents Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+
+  user    users    @relation(fields: [user_id], references: [id])
+  expense expenses @relation(fields: [expense_id], references: [id])
 }
