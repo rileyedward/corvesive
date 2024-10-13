@@ -2,8 +2,6 @@ import type { TApiResponse } from '$lib/types/api.type';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/errors.helper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/paystub.request';
-import type { paystubs } from '@prisma/client';
-import { fail } from '@sveltejs/kit';
 
 export async function CreatePaystub(
 	payload: TPaystubRequest,
