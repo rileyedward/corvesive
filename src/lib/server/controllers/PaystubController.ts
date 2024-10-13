@@ -2,6 +2,7 @@ import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/PaystubRequest';
+import { ScheduleFuturePaystubs } from '../services/PaystubScheduler';
 
 export async function CreatePaystub(
 	payload: TPaystubRequest,
@@ -22,6 +23,8 @@ export async function CreatePaystub(
 			recurrence_interval_two: payload?.recurrence_interval_two
 		}
 	});
+
+	await ScheduleFuturePaystubs(paystub);
 
 	return {
 		message: 'Paystub created',
