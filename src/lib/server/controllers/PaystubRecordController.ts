@@ -1,5 +1,5 @@
 import type { TApiResponse } from '$lib/types/ApiTypes';
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import {
 	ReschedulePaystubRequest,

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { formatZodErrors } from '$lib/server/helpers/ErrorHelper';
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 import bcrypt from 'bcrypt';
 
 export type TLoginRequest = {

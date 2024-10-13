@@ -1,4 +1,4 @@
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 import { type Cookies } from '@sveltejs/kit';
 import { LoginRequest, type TLoginRequest } from '$lib/server/requests/LoginRequest';
 import {

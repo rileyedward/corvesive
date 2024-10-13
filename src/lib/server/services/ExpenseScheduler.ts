@@ -1,6 +1,6 @@
 import type { expenses } from '@prisma/client';
 import dayjs from 'dayjs';
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 
 export async function scheduleFutureExpenses(expense: expenses) {
 	for (let i = 0; i < 12; i++) {

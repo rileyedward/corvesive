@@ -1,5 +1,5 @@
 import type { users } from '@prisma/client';
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 import jwt from 'jsonwebtoken';
 import type { Cookies } from '@sveltejs/kit';
 

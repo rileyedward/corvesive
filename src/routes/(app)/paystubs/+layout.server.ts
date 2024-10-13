@@ -1,4 +1,4 @@
-import prisma from '$lib/server/db';
+import prisma from '$lib/server/database/db';
 import type { users } from '@prisma/client';
 
 export const load = async ({ locals }) => {
