@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import type { users } from '@prisma/client';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
 	export let user: users;
@@ -16,6 +17,11 @@
 			}
 		});
 	});
+
+	function redirectTo(path: string) {
+		dropdownOpen = false;
+		return goto(path);
+	}
 </script>
 
 <nav class="hidden md:flex justify-between items-center py-8 mb-4">
@@ -62,18 +68,18 @@
 				class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-gray-300 z-50"
 			>
 				<div class="rounded-md bg-white shadow-xs">
-					<a
-						href="/profile"
-						class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200 text-left rounded-t-md"
+					<button
+						on:click|preventDefault={() => redirectTo('/profile')}
+						class="w-full block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200 text-left rounded-t-md"
 					>
 						Profile
-					</a>
-					<a
-						href="/logout"
-						class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200 text-left rounded-b-md"
+					</button>
+					<button
+						on:click|preventDefault={() => redirectTo('/logout')}
+						class="w-full block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200 text-left rounded-b-md"
 					>
 						Logout
-					</a>
+					</button>
 				</div>
 			</div>
 		{/if}
