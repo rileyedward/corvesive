@@ -2,15 +2,17 @@
 	import CreatePaystubForm from '$lib/components/paystubs/CreatePaystubForm.svelte';
 	import { CentsToDollarsPretty } from '$lib/helpers/CurrencyHelper';
 	import { DayOfWeek, ShortDate } from '$lib/helpers/DateHelper';
-	import type { paystubs } from '@prisma/client';
+	import type { paystubs, paystub_records } from '@prisma/client';
 	import type { ActionData } from './$types';
 	import UpdatePaystubForm from '$lib/components/paystubs/UpdatePaystubForm.svelte';
+	import PaystubRecordForm from '$lib/components/paystubs/PaystubRecordForm.svelte';
 
 	export let data;
 	export let form: ActionData;
 
 	let showForm: boolean = false;
 	let paystubToUpdate: paystubs | null = null;
+	let paystubRecordToUpdate: paystub_records | null = null;
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -69,7 +71,13 @@
 		{#if data.upcomingPaystubs && data.upcomingPaystubs.length > 0}
 			<div class="space-y-2">
 				{#each data.upcomingPaystubs as upcomingPaystub}
-					<div class="bg-gray-100 p-3 rounded-md shadow-sm hover:bg-gray-200 transition-colors">
+					<button
+						class="bg-gray-100 p-3 rounded-md shadow-sm hover:bg-gray-200 transition-colors text-left"
+						on:click|preventDefault={() => {
+							paystubRecordToUpdate = upcomingPaystub;
+							showForm = true;
+						}}
+					>
 						<p class="text-sm text-gray-700">
 							<strong class="font-medium">{ShortDate(upcomingPaystub.pay_date)}</strong> -
 							{upcomingPaystub.paystub.issuer} -
@@ -77,7 +85,7 @@
 								>{CentsToDollarsPretty(upcomingPaystub.amount_in_cents)}</span
 							>
 						</p>
-					</div>
+					</button>
 				{/each}
 			</div>
 		{:else}
@@ -86,7 +94,10 @@
 	</div>
 </div>
 
-<CreatePaystubForm {form} bind:showForm />
 {#if paystubToUpdate}
 	<UpdatePaystubForm {form} bind:showForm bind:paystub={paystubToUpdate} />
+{:else if paystubRecordToUpdate}
+	<PaystubRecordForm {form} bind:showForm bind:paystubRecord={paystubRecordToUpdate} />
+{:else}
+	<CreatePaystubForm {form} bind:showForm />
 {/if}
