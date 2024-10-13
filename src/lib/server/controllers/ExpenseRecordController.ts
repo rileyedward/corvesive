@@ -43,6 +43,32 @@ export async function RescheduleExpense(
 	};
 }
 
+export async function UnscheduleExpense(
+	expense_record_id: number,
+	user_id: number
+): Promise<TApiResponse> {
+	const expenseRecord = await prisma.expense_records.findFirst({
+		where: {
+			id: expense_record_id,
+			user_id: user_id
+		}
+	});
+
+	if (!expenseRecord) {
+		return AuthorizationError();
+	}
+
+	await prisma.expense_records.delete({
+		where: {
+			id: expenseRecord.id
+		}
+	});
+
+	return {
+		message: 'Expense unscheduled'
+	};
+}
+
 export async function UpdateExpenseRecord(
 	payload: TUpdateExpenseRequest,
 	expense_record_id: number,

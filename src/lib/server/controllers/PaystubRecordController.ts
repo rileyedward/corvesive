@@ -43,6 +43,32 @@ export async function ReschedulePaystub(
 	};
 }
 
+export async function UnschedulePaystub(
+	paystub_record_id: number,
+	user_id: number
+): Promise<TApiResponse> {
+	const paystubRecord = await prisma.paystub_records.findFirst({
+		where: {
+			id: paystub_record_id,
+			user_id: user_id
+		}
+	});
+
+	if (!paystubRecord) {
+		return AuthorizationError();
+	}
+
+	await prisma.paystub_records.delete({
+		where: {
+			id: paystubRecord.id
+		}
+	});
+
+	return {
+		message: 'Paystub unscheduled'
+	};
+}
+
 export async function UpdatePaystubRecord(
 	payload: TUpdatePaystubRequest,
 	paystub_record_id: number,
