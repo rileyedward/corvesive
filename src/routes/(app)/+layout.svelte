@@ -7,8 +7,8 @@
 
 	const navigation = [
 		{
-			name: 'Income',
-			href: '/income'
+			name: 'Paystubs',
+			href: '/paystubs'
 		},
 		{
 			name: 'Expenses',
