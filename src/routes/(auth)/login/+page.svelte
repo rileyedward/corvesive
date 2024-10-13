@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import FormErrors from '$lib/components/FormErrors.svelte';
 	import type { ActionData } from './$types';
+
 	export let form: ActionData;
 </script>
 
