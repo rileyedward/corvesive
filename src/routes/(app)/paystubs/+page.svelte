@@ -12,7 +12,7 @@
 
 	let showForm: boolean = false;
 	let paystubToUpdate: paystubs | null = null;
-	let paystubRecordToUpdate: paystub_records | null = null;
+	let paystubRecordToUpdate: paystub_records & { paystub: paystubs } | null = null;
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
