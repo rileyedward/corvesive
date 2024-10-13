@@ -29,7 +29,7 @@
 </script>
 
 <div class="max-w-4xl mx-auto px-4">
-	<nav class="flex justify-between items-center py-4 mb-4">
+	<nav class="hidden md:flex justify-between items-center py-4 mb-4">
 		<div class="flex items-center gap-16">
 			<h1 class="text-2xl font-bold transform hover:scale-105 transition duration-200">
 				<a href="/dashboard" class="text-gray-900">Corvesive</a>
@@ -89,6 +89,10 @@
 				</div>
 			{/if}
 		</div>
+	</nav>
+
+	<nav class="flex md:hidden">
+		Mobile nav
 	</nav>
 
 	<slot />
