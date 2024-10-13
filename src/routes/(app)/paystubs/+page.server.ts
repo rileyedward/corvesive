@@ -1,3 +1,4 @@
+import { DollarsToCents } from '$lib/helpers/CurrencyHelper';
 import { CreatePaystub } from '$lib/server/controllers/PaystubController';
 import { FormPayload } from '$lib/server/helpers/FormHelper.js';
 import type { TPaystubRequest } from '$lib/server/requests/PaystubRequest.js';
@@ -7,7 +8,9 @@ export const actions = {
 	default: async ({ request, locals }) => {
 		const payload = (await FormPayload(request)) as TPaystubRequest;
 
-		payload.amount_in_cents = parseInt(payload.amount_in_cents as unknown as string);
+		payload.amount_in_cents = DollarsToCents(
+			parseInt(payload.amount_in_cents as unknown as string)
+		);
 		payload.recurrence_interval_one = parseInt(
 			payload.recurrence_interval_one as unknown as string
 		);

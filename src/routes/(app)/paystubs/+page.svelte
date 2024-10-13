@@ -1,5 +1,7 @@
 <script lang="ts">
 	import CreatePaystubForm from '$lib/components/paystubs/CreatePaystubForm.svelte';
+	import { CentsToDollarsPretty } from '$lib/helpers/CurrencyHelper';
+	import { DayOfWeek, ShortDate } from '$lib/helpers/DateHelper';
 	import type { ActionData } from './$types';
 
 	export let data;
@@ -31,12 +33,22 @@
 							<span class="text-sm text-gray-500">{paystub.recurrence_rate}</span>
 						</div>
 						<div class="mt-2 text-sm">
-							<p class="font-semibold text-gray-700">Amount: ${paystub.amount_in_cents}</p>
-							<p class="text-gray-600">Recurrence: {paystub.recurrence_rate}</p>
+							<p class="font-semibold text-gray-700">
+								Amount: {CentsToDollarsPretty(paystub.amount_in_cents)}
+							</p>
+							{#if paystub.recurrence_rate === 'weekly' || paystub.recurrence_rate === 'bi-weekly'}
+								<p class="text-gray-600">
+									Day of Week: {DayOfWeek(paystub.recurrence_interval_one)}
+								</p>
+							{:else}
+								<p class="text-gray-600">
+									Day(s) of Month: {paystub.recurrence_interval_one}
+									{#if paystub.recurrence_interval_two}
+										, {paystub.recurrence_interval_two}
+									{/if}
+								</p>
+							{/if}
 						</div>
-						{#if paystub.recurrence_rate !== 'weekly' && paystub.recurrence_rate !== 'bi-weekly'}
-							<p class="mt-2 text-gray-500">Interval One: {paystub.recurrence_interval_one}</p>
-						{/if}
 					</div>
 				{/each}
 			</div>
@@ -52,10 +64,10 @@
 				{#each data.upcomingPaystubs as upcomingPaystub}
 					<div class="bg-gray-100 p-3 rounded-md shadow-sm">
 						<p class="text-sm text-gray-700">
-							<strong>{new Date(upcomingPaystub.pay_date).toLocaleDateString()}</strong> -
+							<strong>{ShortDate(upcomingPaystub.pay_date)}</strong> -
 							{upcomingPaystub.paystub.issuer} -
 							<span class="font-semibold"
-								>${(upcomingPaystub.amount_in_cents / 100).toFixed(2)}</span
+								>{CentsToDollarsPretty(upcomingPaystub.amount_in_cents)}</span
 							>
 						</p>
 					</div>

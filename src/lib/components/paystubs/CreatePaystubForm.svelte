@@ -55,13 +55,13 @@
 				<div>
 					<label for="recurrence_interval_one">Day of Week</label>
 					<select name="recurrence_interval_one" class="w-full">
-						<option value={1}>Sunday</option>
-						<option value={2}>Monday</option>
-						<option value={3}>Tuesday</option>
-						<option value={4}>Wednesday</option>
-						<option value={5}>Thursday</option>
-						<option value={6}>Friday</option>
-						<option value={7}>Saturday</option>
+						<option value={1}>Monday</option>
+						<option value={2}>Tuesday</option>
+						<option value={3}>Wednesday</option>
+						<option value={4}>Thursday</option>
+						<option value={5}>Friday</option>
+						<option value={6}>Saturday</option>
+						<option value={7}>Sunday</option>
 					</select>
 				</div>
 			{/if}
