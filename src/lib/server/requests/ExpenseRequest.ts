@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { formatZodErrors } from '../helpers/ErrorHelper';
+import { formatZodErrors } from '$lib/server/helpers/ErrorHelper';
 
 export type TExpenseRequest = {
 	issuer: string;

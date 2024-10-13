@@ -2,6 +2,11 @@ import { ExpenseRequest, type TExpenseRequest } from '$lib/server/requests/Expen
 import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
+import {
+	removeFutureExpenses,
+	rescheduleFutureExpenses,
+	scheduleFutureExpenses
+} from '$lib/server/services/ExpenseScheduler';
 
 export async function CreateExpense(
 	payload: TExpenseRequest,
@@ -18,11 +23,12 @@ export async function CreateExpense(
 			issuer: payload.issuer,
 			name: payload.name,
 			due_day_of_month: payload.due_day_of_month,
-			amount_in_cents: payload.amount_in_cents
+			amount_in_cents: payload.amount_in_cents,
+			is_variable: payload.is_variable
 		}
 	});
 
-	// TODO: Implement expense scheduler
+	await scheduleFutureExpenses(expense);
 
 	return {
 		message: 'Expense created',
@@ -59,11 +65,12 @@ export async function UpdateExpense(
 			issuer: payload.issuer,
 			name: payload.name,
 			due_day_of_month: payload.due_day_of_month,
-			amount_in_cents: payload.amount_in_cents
+			amount_in_cents: payload.amount_in_cents,
+			is_variable: payload.is_variable
 		}
 	});
 
-	// TODO: Implement expense scheduler
+	await rescheduleFutureExpenses(updatedExpense);
 
 	return {
 		message: 'Expense updated',
@@ -83,7 +90,7 @@ export async function DeleteExpense(expense_id: number, user_id: number): Promis
 		return AuthorizationError();
 	}
 
-	// TODO: Implement expense scheduler
+	await removeFutureExpenses(expense);
 
 	await prisma.expenses.delete({
 		where: {
