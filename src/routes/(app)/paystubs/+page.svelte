@@ -2,12 +2,15 @@
 	import CreatePaystubForm from '$lib/components/paystubs/CreatePaystubForm.svelte';
 	import { CentsToDollarsPretty } from '$lib/helpers/CurrencyHelper';
 	import { DayOfWeek, ShortDate } from '$lib/helpers/DateHelper';
+	import type { paystubs } from '@prisma/client';
 	import type { ActionData } from './$types';
+	import UpdatePaystubForm from '$lib/components/paystubs/UpdatePaystubForm.svelte';
 
 	export let data;
 	export let form: ActionData;
 
 	let showForm: boolean = false;
+	let paystubToUpdate: paystubs | null = null;
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -25,14 +28,18 @@
 		{#if data.paystubs && data.paystubs.length > 0}
 			<div class="grid gap-4">
 				{#each data.paystubs as paystub}
-					<div
+					<button
 						class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+						on:click={() => {
+							paystubToUpdate = paystub;
+							showForm = true;
+						}}
 					>
 						<div class="flex justify-between items-center">
 							<h3 class="text-lg font-medium">{paystub.issuer}</h3>
 							<span class="text-sm text-gray-500">{paystub.recurrence_rate}</span>
 						</div>
-						<div class="mt-2 text-sm">
+						<div class="mt-2 text-sm text-left">
 							<p class="font-semibold text-gray-700">
 								Amount: {CentsToDollarsPretty(paystub.amount_in_cents)}
 							</p>
@@ -49,7 +56,7 @@
 								</p>
 							{/if}
 						</div>
-					</div>
+					</button>
 				{/each}
 			</div>
 		{:else}
@@ -80,3 +87,6 @@
 </div>
 
 <CreatePaystubForm {form} bind:showForm />
+{#if paystubToUpdate}
+	<UpdatePaystubForm {form} bind:showForm bind:paystub={paystubToUpdate} />
+{/if}

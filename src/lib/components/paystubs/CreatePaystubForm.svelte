@@ -19,7 +19,7 @@
 		<form
 			class="space-y-4"
 			method="POST"
-			action="/paystubs"
+			action="/paystubs?/create"
 			use:enhance={() => {
 				return async ({ result, update }) => {
 					if (result.type === 'success') {

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { formatZodErrors } from '$lib/server/helpers/ErrorHelper';
 
 export type TPaystubRequest = {
+	paystub_id?: number;
 	issuer: string;
 	amount_in_cents: number;
 	recurrence_rate: 'weekly' | 'bi-weekly' | 'monthly' | 'semi-monthly';
