@@ -12,6 +12,22 @@ export async function scheduleFuturePaystubs(paystub: paystubs) {
   }
 }
 
+export async function rescheduleFuturePaystubs(paystub: paystubs) {
+  await removeFuturePaystubs(paystub);
+  await scheduleFuturePaystubs(paystub);
+}
+
+async function removeFuturePaystubs(paystub: paystubs) {
+  await prisma.paystub_records.deleteMany({
+    where: {
+      paystub_id: paystub.id,
+      pay_day: {
+        gte: new Date()
+      }
+    }
+  });
+}
+
 async function generateMonthlyPaystubs(paystub: paystubs) {
 	for (let i = 0; i < 12; i++) {
 		let payDate = dayjs().add(i, 'month').day(paystub.recurrence_interval_one).toDate();

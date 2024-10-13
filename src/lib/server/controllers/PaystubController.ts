@@ -2,7 +2,7 @@ import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/PaystubRequest';
-import { scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
+import { rescheduleFuturePaystubs, scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
 
 export async function CreatePaystub(
 	payload: TPaystubRequest,
@@ -65,6 +65,8 @@ export async function UpdatePaystub(
 			recurrence_interval_two: payload?.recurrence_interval_two ?? null
 		}
 	});
+
+	await rescheduleFuturePaystubs(updatedPaystub);
 
 	return {
 		message: 'Paystub updated',
