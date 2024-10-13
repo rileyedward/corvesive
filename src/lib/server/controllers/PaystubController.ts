@@ -2,7 +2,7 @@ import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/PaystubRequest';
-import { rescheduleFuturePaystubs, scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
+import { removeFuturePaystubs, rescheduleFuturePaystubs, scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
 
 export async function CreatePaystub(
 	payload: TPaystubRequest,
@@ -87,6 +87,8 @@ export async function DeletePaystub(paystub_id: number, user_id: number): Promis
 	if (!paystub) {
 		return AuthorizationError();
 	}
+
+	await removeFuturePaystubs(paystub);
 
 	await prisma.paystubs.delete({
 		where: {

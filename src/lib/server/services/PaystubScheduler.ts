@@ -17,7 +17,7 @@ export async function rescheduleFuturePaystubs(paystub: paystubs) {
   await scheduleFuturePaystubs(paystub);
 }
 
-async function removeFuturePaystubs(paystub: paystubs) {
+export async function removeFuturePaystubs(paystub: paystubs) {
   await prisma.paystub_records.deleteMany({
     where: {
       paystub_id: paystub.id,
