@@ -20,8 +20,8 @@ export const PaystubSchema = z.object({
 	issuer: z.string().min(1).max(50),
 	amount_in_cents: z.number().int().positive(),
 	recurrence_rate: z.enum(['weekly', 'bi-weekly', 'monthly', 'semi-monthly']),
-	recurrence_interval_one: z.number().int().min(1).max(31),
-	recurrence_interval_two: z.number().int().min(1).max(31).optional().nullable()
+	recurrence_interval_one: z.number().int().min(1).max(28),
+	recurrence_interval_two: z.number().int().min(1).max(28).optional().nullable()
 });
 
 export const UpdatePaystubSchema = z.object({

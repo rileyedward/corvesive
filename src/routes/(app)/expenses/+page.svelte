@@ -4,6 +4,7 @@
 	import { ShortDate } from '$lib/helpers/DateHelper.js';
 	import type { expense_records, expenses } from '@prisma/client';
 	import type { ActionData } from './$types.js';
+	import UpdateExpenseForm from '$lib/components/expenses/UpdateExpenseForm.svelte';
 
 	export let data;
 	export let form: ActionData;
@@ -26,9 +27,30 @@
 		</div>
 
 		{#if data.expenses && data.expenses.length > 0}
-			{#each data.expenses as expense}
-				<h1>{expense.name}</h1>
-			{/each}
+			<div class="grid gap-4">
+				{#each data.expenses as expense}
+					<button
+						class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+						on:click|preventDefault={() => {
+							expenseToUpdate = expense;
+							showForm = true;
+						}}
+					>
+						<div class="flex justify-between items-center">
+							<h3 class="text-lg font-medium">{expense.issuer}</h3>
+							<span class="text-sm text-gray-500">{expense.name}</span>
+						</div>
+						<div class="mt-2 text-sm text-left">
+							<p class="font-semibold text-gray-700">
+								Amount: {CentsToDollarsPretty(expense.amount_in_cents)}
+							</p>
+							<p class="text-gray-600">
+								Due Day of Month: {expense.due_day_of_month}
+							</p>
+						</div>
+					</button>
+				{/each}
+			</div>
 		{:else}
 			<p class="text-gray-500 text-sm">Create a new expense to get started.</p>
 		{/if}
@@ -61,4 +83,10 @@
 	</div>
 </div>
 
-<CreateExpenseForm {form} bind:showForm />
+{#if expenseToUpdate}
+	<UpdateExpenseForm {form} bind:showForm bind:expense={expenseToUpdate} />
+{:else if expenseRecordToUpdate}
+	<h1>TODO:</h1>
+{:else}
+	<CreateExpenseForm {form} bind:showForm />
+{/if}

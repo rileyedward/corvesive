@@ -19,6 +19,7 @@ export type TUpdateExpenseRequest = {
 export const ExpenseSchema = z.object({
 	issuer: z.string().min(1).max(50),
 	name: z.string().min(1).max(50),
+	due_day_of_month: z.number().int().min(1).max(28),
 	amount_in_cents: z.number().int().positive(),
 	is_variable: z.string().optional().nullable()
 });
