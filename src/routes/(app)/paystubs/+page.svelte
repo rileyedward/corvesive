@@ -13,15 +13,33 @@
 </script>
 
 <div>
-	<div class="max-w-lg">
-		<div class="flex justify-between items-center">
-			<h1>Paystubs</h1>
+	<div class="max-w-lg mx-auto">
+		<div class="flex justify-between items-center mb-6">
+			<h1 class="text-2xl font-semibold">Paystubs</h1>
 			<button
 				on:click|preventDefault={() => (showForm = true)}
-				class="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white"
+				class="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white hover:bg-gray-600 transition-colors"
 			>
-				+
+				<span class="text-xl">+</span>
 			</button>
+		</div>
+
+		<div class="grid gap-4">
+			{#each data.paystubs as paystub}
+				<div class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+					<div class="flex justify-between items-center">
+						<h3 class="text-lg font-medium">{paystub.issuer}</h3>
+						<span class="text-sm text-gray-500">{new Date(paystub.created_at).toLocaleDateString()}</span>
+					</div>
+					<div class="mt-2 text-sm">
+						<p class="font-semibold text-gray-700">Amount: ${paystub.amount_in_cents / 100}</p>
+						<p class="text-gray-600">Recurrence: {paystub.recurrence_rate}</p>
+					</div>
+					{#if paystub.recurrence_rate !== 'weekly' && paystub.recurrence_rate !== 'bi-weekly'}
+						<p class="mt-2 text-gray-500">Interval One: {paystub.recurrence_interval_one}</p>
+					{/if}
+				</div>
+			{/each}
 		</div>
 	</div>
 </div>
