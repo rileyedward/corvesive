@@ -4,6 +4,7 @@
 	import FormErrors from '$lib/components/FormErrors.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import { CentsToDollars } from '$lib/helpers/CurrencyHelper';
+	import TrashIcon from '$lib/icons/TrashIcon.svelte';
 	import type { paystubs } from '@prisma/client';
 
 	export let paystub: paystubs | null;
@@ -22,10 +23,33 @@
 		}}
 	>
 		<div>
-			<p class="max-w-xl text-xs mb-4">
-				You can manage your paystub here. You can update the issuer, amount, and recurrence rate of
-				your paystub.
-			</p>
+			<div class="flex justify-between items-start mb-4">
+				<p class="max-w-xl text-xs">
+					You can manage your paystub here. You can update the issuer, amount, and recurrence rate
+					of your paystub.
+				</p>
+
+				<form
+					method="POST"
+					action="/paystubs?/remove"
+					use:enhance={() => {
+						return async ({ result, update }) => {
+							if (result.type === 'success') {
+								invalidate('paystubs');
+								showForm = false;
+								paystub = null;
+							}
+
+							update();
+						};
+					}}
+				>
+					<input type="hidden" name="paystub_id" value={paystub.id} />
+					<button type="submit">
+						<TrashIcon />
+					</button>
+				</form>
+			</div>
 
 			<form
 				class="space-y-4"
