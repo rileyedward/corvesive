@@ -7,6 +7,6 @@ export const actions = {
 	default: async ({ request, cookies }) => {
 		const payload = (await FormPayload(request)) as TRegistrationRequest;
 
-		return Register(payload, cookies);
+		return await Register(payload, cookies);
 	}
 } satisfies Actions;

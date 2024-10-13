@@ -1,5 +1,9 @@
 import { DollarsToCents } from '$lib/helpers/CurrencyHelper';
-import { CreatePaystub, UpdatePaystub } from '$lib/server/controllers/PaystubController';
+import {
+	CreatePaystub,
+	DeletePaystub,
+	UpdatePaystub
+} from '$lib/server/controllers/PaystubController';
 import { FormPayload } from '$lib/server/helpers/FormHelper.js';
 import type { TPaystubRequest } from '$lib/server/requests/PaystubRequest.js';
 import type { Actions } from '@sveltejs/kit';
@@ -17,7 +21,7 @@ export const actions = {
 		payload.recurrence_interval_two =
 			parseInt(payload.recurrence_interval_two as unknown as string) || undefined;
 
-		return CreatePaystub(payload, locals.user.id);
+		return await CreatePaystub(payload, locals.user.id);
 	},
 	update: async ({ request, locals }) => {
 		const payload = (await FormPayload(request)) as TPaystubRequest;
@@ -32,6 +36,13 @@ export const actions = {
 		payload.recurrence_interval_two =
 			parseInt(payload.recurrence_interval_two as unknown as string) || undefined;
 
-		return UpdatePaystub(payload, payload.paystub_id, locals.user.id);
+		return await UpdatePaystub(payload, payload.paystub_id, locals.user.id);
+	},
+	remove: async ({ request, locals }) => {
+		const payload = (await FormPayload(request)) as { paystub_id: number };
+
+		payload.paystub_id = parseInt(payload.paystub_id as unknown as string);
+
+		return await DeletePaystub(payload.paystub_id, locals.user.id);
 	}
 } satisfies Actions;
