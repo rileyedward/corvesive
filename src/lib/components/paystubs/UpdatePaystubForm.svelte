@@ -4,7 +4,6 @@
 	import FormErrors from '$lib/components/FormErrors.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import { CentsToDollars } from '$lib/helpers/CurrencyHelper';
-	import TrashIcon from '$lib/icons/TrashIcon.svelte';
 	import type { paystubs } from '@prisma/client';
 	import RemoveButton from '../RemoveButton.svelte';
 
