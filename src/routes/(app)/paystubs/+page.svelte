@@ -8,17 +8,30 @@
 	export let data;
 	export let form: ActionData;
 
-	let showForm: boolean = true;
+	let showForm: boolean = false;
 	let recurrence_rate: 'weekly' | 'bi-weekly' | 'monthly' | 'semi-monthly' = 'weekly';
 </script>
 
 <div>
-	<h1>Paystubs</h1>
+	<div class="max-w-lg">
+		<div class="flex justify-between items-center">
+			<h1>Paystubs</h1>
+			<button
+				on:click|preventDefault={() => (showForm = true)}
+				class="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white"
+			>
+				+
+			</button>
+		</div>
+	</div>
 </div>
 
-<Modal title="New Paystub" show={showForm} close={() => (showForm = false)}>
+<Modal title="Add new paystub" show={showForm} close={() => (showForm = false)}>
 	<div>
-		<p class="text-sm mb-6">Add a new paystub</p>
+		<p class="max-w-xl text-xs mb-4">
+			Track your monthly income by adding a new paystub. This will help you better plan your monthly
+			budget.
+		</p>
 
 		<form
 			class="space-y-4"
