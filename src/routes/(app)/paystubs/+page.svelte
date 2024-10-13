@@ -7,6 +7,7 @@
 	export let data;
 	export let form: ActionData;
 
+	let showForm: boolean = true;
 	let recurrence_rate: 'weekly' | 'bi-weekly' | 'monthly' | 'semi-monthly' = 'weekly';
 </script>
 
@@ -14,7 +15,7 @@
 	<h1>Paystubs</h1>
 </div>
 
-<Modal title="New Paystub" show={true} close={() => alert('closing...')}>
+<Modal title="New Paystub" show={showForm} close={() => showForm = false}>
 	<div>
 		<p class="text-sm mb-6">Add a new paystub</p>
 
