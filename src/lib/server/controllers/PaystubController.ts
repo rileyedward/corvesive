@@ -2,7 +2,7 @@ import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/PaystubRequest';
-import { ScheduleFuturePaystubs } from '../services/PaystubScheduler';
+import { scheduleFuturePaystubs } from '$lib/server/services/PaystubScheduler';
 
 export async function CreatePaystub(
 	payload: TPaystubRequest,
@@ -24,7 +24,7 @@ export async function CreatePaystub(
 		}
 	});
 
-	await ScheduleFuturePaystubs(paystub);
+	await scheduleFuturePaystubs(paystub);
 
 	return {
 		message: 'Paystub created',

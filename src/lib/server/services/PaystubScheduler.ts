@@ -3,13 +3,16 @@ import dayjs from 'dayjs';
 import prisma from '../db';
 
 export async function scheduleFuturePaystubs(paystub: paystubs) {
-	// weekly
-	// bi-weekly
-	// monthly
-	// bi-monthly
+	if (paystub.recurrence_rate === 'monthly' || paystub.recurrence_rate === 'semi-monthly') {
+    await generateMonthlyPaystubs(paystub);
+  }
+
+  if (paystub.recurrence_rate === 'weekly' || paystub.recurrence_rate === 'bi-weekly') {
+    await generateWeeklyPaystubs(paystub);
+  }
 }
 
-export async function generateMonthlyPaystubs(paystub: paystubs) {
+async function generateMonthlyPaystubs(paystub: paystubs) {
 	for (let i = 0; i < 12; i++) {
 		let payDate = dayjs().add(i, 'month').day(paystub.recurrence_interval_one).toDate();
 
@@ -35,4 +38,23 @@ export async function generateMonthlyPaystubs(paystub: paystubs) {
 			});
 		}
 	}
+}
+
+async function generateWeeklyPaystubs(paystub: paystubs) {
+  const interval = paystub.recurrence_rate === 'bi-weekly' ? 2 : 1;
+
+  const startOfWeek = dayjs().startOf('week');
+
+  for (let i = 0; i < 52; i += interval) {
+    const payDate = startOfWeek.add(i, 'week').add(paystub.recurrence_interval_one, 'day').toDate();
+
+    await prisma.paystub_records.create({
+      data: {
+        user_id: paystub.user_id,
+        paystub_id: paystub.id,
+        pay_day: payDate,
+        amount_in_cents: paystub.amount_in_cents
+      }
+    });
+  }
 }
