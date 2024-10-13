@@ -13,7 +13,7 @@ export async function DatabaseSeeder() {
 			}
 		});
 
-		const paystub = await PaystubFactory(user, 'semi-monthly');
+		const paystub = await PaystubFactory(user, 'bi-weekly');
 
 		await scheduleFuturePaystubs(paystub);
 	} catch (error) {

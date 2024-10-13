@@ -30,7 +30,11 @@ export async function removeFuturePaystubs(paystub: paystubs) {
 
 async function generateMonthlyPaystubs(paystub: paystubs) {
 	for (let i = 0; i < 12; i++) {
-		let payDate = dayjs().add(i, 'month').day(paystub.recurrence_interval_one).toDate();
+		const payDate = dayjs()
+			.startOf('month')
+			.add(i, 'month')
+			.date(paystub.recurrence_interval_one)
+			.toDate();
 
 		await prisma.paystub_records.create({
 			data: {
@@ -42,13 +46,17 @@ async function generateMonthlyPaystubs(paystub: paystubs) {
 		});
 
 		if (paystub.recurrence_rate === 'semi-monthly' && paystub.recurrence_interval_two) {
-			payDate = dayjs().add(i, 'month').day(paystub.recurrence_interval_two).toDate();
+			const newPayDate = dayjs()
+				.startOf('month')
+				.add(i, 'month')
+				.date(paystub.recurrence_interval_two)
+				.toDate();
 
 			await prisma.paystub_records.create({
 				data: {
 					user_id: paystub.user_id,
 					paystub_id: paystub.id,
-					pay_date: dayjs(payDate).add(14, 'day').toDate(),
+					pay_date: newPayDate,
 					amount_in_cents: paystub.amount_in_cents
 				}
 			});
