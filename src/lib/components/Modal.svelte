@@ -43,7 +43,7 @@
 						</svg>
 					</button>
 				</div>
-				<div class="px-6 py-6">
+				<div class="py-6">
 					<slot />
 				</div>
 			</div>
