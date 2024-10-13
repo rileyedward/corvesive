@@ -4,7 +4,11 @@ import prisma from '$lib/server/database/db';
 
 export async function scheduleFutureExpenses(expense: expenses) {
 	for (let i = 0; i < 12; i++) {
-		const dueDate = dayjs().add(i, 'month').day(expense.due_day_of_month).toDate();
+		const dueDate = dayjs()
+			.startOf('month')
+			.add(i, 'month')
+			.date(expense.due_day_of_month)
+			.toDate();
 
 		await prisma.expense_records.create({
 			data: {
