@@ -2,6 +2,9 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
+	import MenuIcon from '$lib/icons/MenuIcon.svelte';
+	import { fly } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	export let data: LayoutData;
 
@@ -17,6 +20,15 @@
 	];
 
 	let dropdownOpen: boolean = false;
+	let mobileMenuOpen: boolean = false;
+
+	$: textColor = mobileMenuOpen ? 'text-white' : 'black';
+
+	function redirectTo(path: string) {
+		dropdownOpen = false;
+		mobileMenuOpen = false;
+		return goto(path);
+	}
 
 	onMount(() => {
 		document.addEventListener('click', (event) => {
@@ -29,7 +41,7 @@
 </script>
 
 <div class="max-w-4xl mx-auto px-4">
-	<nav class="hidden md:flex justify-between items-center py-4 mb-4">
+	<nav class="hidden md:flex justify-between items-center py-8 mb-4">
 		<div class="flex items-center gap-16">
 			<h1 class="text-2xl font-bold transform hover:scale-105 transition duration-200">
 				<a href="/dashboard" class="text-gray-900">Corvesive</a>
@@ -91,8 +103,49 @@
 		</div>
 	</nav>
 
-	<nav class="flex md:hidden">
-		Mobile nav
+	<nav class="flex md:hidden relative justify-between items-center py-8 z-40">
+		<div class="z-50">
+			<button on:click|preventDefault={() => redirectTo('/dashboard')}>
+				<h1 class={`text-2xl font-bold transition-colors ease-in-out ${textColor}`}>Corvesive</h1>
+			</button>
+		</div>
+
+		<div class="z-50">
+			<button on:click|preventDefault={() => (mobileMenuOpen = !mobileMenuOpen)}>
+				<MenuIcon {textColor} />
+			</button>
+		</div>
+
+		{#if mobileMenuOpen}
+			<div class="fixed inset-0 bg-black py-24 px-4" transition:fly={{ y: 10, duration: 300 }}>
+				<ul class="flex flex-col gap-8">
+					<li class="text-white font-normal hover:font-semibold">
+						<button on:click|preventDefault={() => redirectTo('/dashboard')}> Dashboard </button>
+					</li>
+				</ul>
+
+				<hr class="border-1 border-gray-200 my-8" />
+
+				<ul class="flex flex-col gap-8">
+					<li class="text-white font-normal hover:font-semibold">
+						<button
+							on:click|preventDefault={() => redirectTo('/profile')}
+							class="flex items-center gap-4"
+						>
+							Profile
+						</button>
+					</li>
+					<li class="text-white font-normal hover:font-semibold">
+						<button
+							on:click|preventDefault={() => redirectTo('/logout')}
+							class="flex items-center gap-4"
+						>
+							Logout
+						</button>
+					</li>
+				</ul>
+			</div>
+		{/if}
 	</nav>
 
 	<slot />
