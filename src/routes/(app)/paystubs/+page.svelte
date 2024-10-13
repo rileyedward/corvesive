@@ -13,7 +13,7 @@
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
-	<div class="w-full md:w-3/4">
+	<div class="w-full md:w-full">
 		<div class="flex justify-between items-center mb-6">
 			<h1 class="text-2xl font-semibold">Paystubs</h1>
 			<button
@@ -49,9 +49,25 @@
 		{/if}
 	</div>
 
-	<div class="w-full md:w-1/3 bg-white p-4 rounded-lg shadow-sm">
-		<h4 class="text-lg font-semibold mb-4">Upcoming</h4>
-		<p class="text-gray-500 text-sm">No upcoming paystubs scheduled.</p>
+	<div class="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-sm">
+		<h4 class="text-lg font-semibold mb-4">Upcoming Paystubs</h4>
+		{#if data.upcomingPaystubs && data.upcomingPaystubs.length > 0}
+			<div class="space-y-2">
+				{#each data.upcomingPaystubs as upcomingPaystub}
+					<div class="bg-gray-100 p-3 rounded-md shadow-sm">
+						<p class="text-sm text-gray-700">
+							<strong>{new Date(upcomingPaystub.pay_date).toLocaleDateString()}</strong> -
+							{upcomingPaystub.paystub.issuer} -
+							<span class="font-semibold"
+								>${(upcomingPaystub.amount_in_cents / 100).toFixed(2)}</span
+							>
+						</p>
+					</div>
+				{/each}
+			</div>
+		{:else}
+			<p class="text-gray-500 text-sm">No upcoming paystubs.</p>
+		{/if}
 	</div>
 </div>
 
