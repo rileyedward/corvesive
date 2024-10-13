@@ -24,25 +24,29 @@
 			</button>
 		</div>
 
-		<div class="grid gap-4">
-			{#each data.paystubs as paystub}
-				<div
-					class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-				>
-					<div class="flex justify-between items-center">
-						<h3 class="text-lg font-medium">{paystub.issuer}</h3>
-						<span class="text-sm text-gray-500">{paystub.recurrence_rate}</span>
+		{#if data.paystubs && data.paystubs.length > 0}
+			<div class="grid gap-4">
+				{#each data.paystubs as paystub}
+					<div
+						class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+					>
+						<div class="flex justify-between items-center">
+							<h3 class="text-lg font-medium">{paystub.issuer}</h3>
+							<span class="text-sm text-gray-500">{paystub.recurrence_rate}</span>
+						</div>
+						<div class="mt-2 text-sm">
+							<p class="font-semibold text-gray-700">Amount: ${paystub.amount_in_cents}</p>
+							<p class="text-gray-600">Recurrence: {paystub.recurrence_rate}</p>
+						</div>
+						{#if paystub.recurrence_rate !== 'weekly' && paystub.recurrence_rate !== 'bi-weekly'}
+							<p class="mt-2 text-gray-500">Interval One: {paystub.recurrence_interval_one}</p>
+						{/if}
 					</div>
-					<div class="mt-2 text-sm">
-						<p class="font-semibold text-gray-700">Amount: ${paystub.amount_in_cents}</p>
-						<p class="text-gray-600">Recurrence: {paystub.recurrence_rate}</p>
-					</div>
-					{#if paystub.recurrence_rate !== 'weekly' && paystub.recurrence_rate !== 'bi-weekly'}
-						<p class="mt-2 text-gray-500">Interval One: {paystub.recurrence_interval_one}</p>
-					{/if}
-				</div>
-			{/each}
-		</div>
+				{/each}
+			</div>
+		{:else}
+			<p class="text-gray-500 text-sm">Create a new paystub to get started.</p>
+		{/if}
 	</div>
 </div>
 
