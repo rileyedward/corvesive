@@ -10,11 +10,8 @@ export type TPaystubRequest = {
 	recurrence_interval_two?: number;
 };
 
-export type TReschedulePaystubRequest = {
-	pay_date: Date;
-};
-
 export type TUpdatePaystubRequest = {
+	pay_date: Date;
 	amount_in_cents: number;
 };
 
@@ -26,11 +23,8 @@ export const PaystubSchema = z.object({
 	recurrence_interval_two: z.number().int().min(1).max(31).optional().nullable()
 });
 
-export const ReschedulePaystubSchema = z.object({
-	pay_date: z.date()
-});
-
 export const UpdatePaystubSchema = z.object({
+	pay_date: z.date(),
 	amount_in_cents: z.number().int().positive()
 });
 
@@ -38,15 +32,6 @@ export function PaystubRequest(payload: TPaystubRequest): string[] {
 	const result = PaystubSchema.safeParse(payload);
 
 	console.log(result.error?.errors);
-	if (!result.success) {
-		return formatZodErrors(result.error.issues);
-	}
-
-	return [];
-}
-
-export function ReschedulePaystubRequest(payload: TReschedulePaystubRequest): string[] {
-	const result = ReschedulePaystubSchema.safeParse(payload);
 	if (!result.success) {
 		return formatZodErrors(result.error.issues);
 	}
