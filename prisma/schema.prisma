@@ -15,6 +15,10 @@ model users {
   password   String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
+
+  tokens          tokens?
+  paystubs        paystubs[]
+  paystub_records paystub_records[]
 }
 
 model tokens {
@@ -23,6 +27,8 @@ model tokens {
   token      String    @unique
   created_at DateTime  @default(now())
   expires_at DateTime?
+
+  user users @relation(fields: [user_id], references: [id])
 }
 
 model paystubs {
@@ -35,4 +41,20 @@ model paystubs {
   recurrence_interval_two Int?
   created_at              DateTime @default(now())
   updated_at              DateTime @default(now()) @updatedAt
+
+  user            users             @relation(fields: [user_id], references: [id])
+  paystub_records paystub_records[]
+}
+
+model paystub_records {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  paystub_id      Int
+  pay_day         DateTime
+  amount_in_cents Int
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+
+  user    users    @relation(fields: [user_id], references: [id])
+  paystub paystubs @relation(fields: [paystub_id], references: [id])
 }
