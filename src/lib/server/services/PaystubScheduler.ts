@@ -4,28 +4,28 @@ import prisma from '$lib/server/db';
 
 export async function scheduleFuturePaystubs(paystub: paystubs) {
 	if (paystub.recurrence_rate === 'monthly' || paystub.recurrence_rate === 'semi-monthly') {
-    await generateMonthlyPaystubs(paystub);
-  }
+		await generateMonthlyPaystubs(paystub);
+	}
 
-  if (paystub.recurrence_rate === 'weekly' || paystub.recurrence_rate === 'bi-weekly') {
-    await generateWeeklyPaystubs(paystub);
-  }
+	if (paystub.recurrence_rate === 'weekly' || paystub.recurrence_rate === 'bi-weekly') {
+		await generateWeeklyPaystubs(paystub);
+	}
 }
 
 export async function rescheduleFuturePaystubs(paystub: paystubs) {
-  await removeFuturePaystubs(paystub);
-  await scheduleFuturePaystubs(paystub);
+	await removeFuturePaystubs(paystub);
+	await scheduleFuturePaystubs(paystub);
 }
 
 export async function removeFuturePaystubs(paystub: paystubs) {
-  await prisma.paystub_records.deleteMany({
-    where: {
-      paystub_id: paystub.id,
-      pay_day: {
-        gte: new Date()
-      }
-    }
-  });
+	await prisma.paystub_records.deleteMany({
+		where: {
+			paystub_id: paystub.id,
+			pay_day: {
+				gte: new Date()
+			}
+		}
+	});
 }
 
 async function generateMonthlyPaystubs(paystub: paystubs) {
@@ -57,20 +57,20 @@ async function generateMonthlyPaystubs(paystub: paystubs) {
 }
 
 async function generateWeeklyPaystubs(paystub: paystubs) {
-  const interval = paystub.recurrence_rate === 'bi-weekly' ? 2 : 1;
+	const interval = paystub.recurrence_rate === 'bi-weekly' ? 2 : 1;
 
-  const startOfWeek = dayjs().startOf('week');
+	const startOfWeek = dayjs().startOf('week');
 
-  for (let i = 0; i < 52; i += interval) {
-    const payDate = startOfWeek.add(i, 'week').add(paystub.recurrence_interval_one, 'day').toDate();
+	for (let i = 0; i < 52; i += interval) {
+		const payDate = startOfWeek.add(i, 'week').add(paystub.recurrence_interval_one, 'day').toDate();
 
-    await prisma.paystub_records.create({
-      data: {
-        user_id: paystub.user_id,
-        paystub_id: paystub.id,
-        pay_day: payDate,
-        amount_in_cents: paystub.amount_in_cents
-      }
-    });
-  }
+		await prisma.paystub_records.create({
+			data: {
+				user_id: paystub.user_id,
+				paystub_id: paystub.id,
+				pay_day: payDate,
+				amount_in_cents: paystub.amount_in_cents
+			}
+		});
+	}
 }

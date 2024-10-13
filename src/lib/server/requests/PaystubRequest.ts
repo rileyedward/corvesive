@@ -11,7 +11,7 @@ export type TPaystubRequest = {
 
 export type TReschedulePaystubRequest = {
 	pay_day: Date;
-}
+};
 
 export type TUpdatePaystubRequest = {
 	amount_in_cents: number;
