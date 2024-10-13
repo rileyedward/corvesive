@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { formatZodErrors } from '$lib/server/helpers/errors.helper';
+import { formatZodErrors } from '$lib/server/helpers/ErrorHelper';
 import prisma from '$lib/server/db';
 import bcrypt from 'bcrypt';
 

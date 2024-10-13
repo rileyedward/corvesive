@@ -1,6 +1,6 @@
-import { Register } from '$lib/server/controllers/auth.controller';
-import { FormPayload } from '$lib/server/helpers/form.helper';
-import type { TRegistrationRequest } from '$lib/server/requests/register.request';
+import { Register } from '$lib/server/controllers/AuthController';
+import { FormPayload } from '$lib/server/helpers/FormHelper';
+import type { TRegistrationRequest } from '$lib/server/requests/RegisterRequest';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {

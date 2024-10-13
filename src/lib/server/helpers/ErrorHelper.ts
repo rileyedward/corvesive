@@ -1,4 +1,4 @@
-import type { TApiError } from '$lib/types/api.type';
+import type { TApiError } from '$lib/types/ApiTypes';
 import { fail } from '@sveltejs/kit';
 import type { ZodIssue } from 'zod';
 

@@ -1,4 +1,4 @@
-import { verifyToken } from '$lib/server/helpers/auth.helper';
+import { verifyToken } from '$lib/server/helpers/AuthHelper';
 import type { users } from '@prisma/client';
 import type { RequestEvent } from '@sveltejs/kit';
 

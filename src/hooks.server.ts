@@ -1,4 +1,4 @@
-import { authorizationMiddleware } from '$lib/server/middleware/auth.middleware';
+import { authorizationMiddleware } from '$lib/server/middleware/AuthMiddleware';
 
 export const handle = async ({ event, resolve }) => {
 	await authorizationMiddleware(event);
