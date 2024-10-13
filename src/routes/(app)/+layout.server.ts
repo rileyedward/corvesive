@@ -9,13 +9,6 @@ export const load = async ({ locals, depends }) => {
 	}
 
 	const user = await prisma.users.findUnique({
-		select: {
-			id: true,
-			first_name: true,
-			last_name: true,
-			email: true,
-			password: false
-		},
 		where: { id: locals.user.id }
 	});
 
