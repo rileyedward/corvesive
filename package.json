@@ -9,6 +9,7 @@
 		"docker:up": "docker-compose up -d",
 		"docker:down": "docker-compose down -v",
 		"db:migrate": "prisma migrate dev",
+		"db:fresh": "prisma migrate reset --force && prisma migrate dev",
 		"db:generate": "prisma generate",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
