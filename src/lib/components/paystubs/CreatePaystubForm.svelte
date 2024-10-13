@@ -42,7 +42,7 @@
 			</div>
 
 			<div>
-				<label for="recurrence_rate">Recurrence Rate</label>
+				<label for="recurrence_rate">Recurrence</label>
 				<select name="recurrence_rate" class="w-full" bind:value={recurrence_rate}>
 					<option value="weekly">Weekly</option>
 					<option value="bi-weekly">Bi-Weekly</option>
@@ -53,7 +53,7 @@
 
 			{#if recurrence_rate === 'weekly' || recurrence_rate === 'bi-weekly'}
 				<div>
-					<label for="recurrence_interval_one">Interval One</label>
+					<label for="recurrence_interval_one">Day of Week</label>
 					<select name="recurrence_interval_one" class="w-full">
 						<option value={1}>Sunday</option>
 						<option value={2}>Monday</option>
@@ -68,7 +68,7 @@
 
 			{#if recurrence_rate === 'monthly' || recurrence_rate === 'semi-monthly'}
 				<div>
-					<label for="recurrence_interval_one">Interval One</label>
+					<label for="recurrence_interval_one">Day of Month (1)</label>
 					<select name="recurrence_interval_one" class="w-full">
 						{#each Array.from({ length: 28 }, (_, i) => i + 1) as day}
 							<option value={day}>{day}</option>
@@ -79,7 +79,7 @@
 
 			{#if recurrence_rate === 'semi-monthly'}
 				<div>
-					<label for="recurrence_interval_two">Interval Two</label>
+					<label for="recurrence_interval_two">Day of Month (2)</label>
 					<select name="recurrence_interval_two" class="w-full">
 						{#each Array.from({ length: 28 }, (_, i) => i + 1) as day}
 							<option value={day}>{day}</option>
