@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
-	<div class="w-full md:w-full">
+	<div class="w-full">
 		<div class="flex justify-between items-center mb-6">
 			<h1 class="text-xl font-semibold">Paystubs</h1>
 			<button

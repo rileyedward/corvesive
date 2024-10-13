@@ -24,7 +24,7 @@ export async function CreateExpense(
 			name: payload.name,
 			due_day_of_month: payload.due_day_of_month,
 			amount_in_cents: payload.amount_in_cents,
-			is_variable: payload.is_variable
+			is_variable: payload.is_variable === 'on'
 		}
 	});
 
@@ -66,7 +66,7 @@ export async function UpdateExpense(
 			name: payload.name,
 			due_day_of_month: payload.due_day_of_month,
 			amount_in_cents: payload.amount_in_cents,
-			is_variable: payload.is_variable
+			is_variable: payload.is_variable === 'on'
 		}
 	});
 
