@@ -14,10 +14,6 @@
 
 <div>
 	<h1>Paystubs</h1>
-
-	<div>
-		{JSON.stringify(data.paystubs)}
-	</div>
 </div>
 
 <Modal title="New Paystub" show={showForm} close={() => (showForm = false)}>
