@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="w-full md:w-1/2 bg-white p-4 rounded-lg shadow-sm">
-		<h4 class="text-lg font-semibold mb-4">Upcoming Paystubs</h4>
+		<h4 class="text-lg font-semibold mb-4">Upcoming</h4>
 		{#if data.upcomingPaystubs && data.upcomingPaystubs.length > 0}
 			<div class="space-y-2">
 				{#each data.upcomingPaystubs as upcomingPaystub}
