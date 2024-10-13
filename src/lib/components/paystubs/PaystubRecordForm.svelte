@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { paystub_records } from '@prisma/client';
+	import type { paystub_records, paystubs } from '@prisma/client';
 	import Modal from '../Modal.svelte';
 	import FormErrors from '../FormErrors.svelte';
 	import { enhance } from '$app/forms';
@@ -7,7 +7,7 @@
 	import RemoveButton from '../RemoveButton.svelte';
 	import { CentsToDollars } from '$lib/helpers/CurrencyHelper';
 
-	export let paystubRecord: paystub_records | null;
+	export let paystubRecord: (paystub_records & { paystub: paystubs }) | null;
 	export let form;
 	export let showForm: boolean;
 </script>
@@ -24,8 +24,7 @@
 		<div>
 			<div class="flex justify-between items-start mb-4">
 				<p class="max-w-xl text-xs">
-					Reschedule or remove your paystub here. You can also update the amount for this specific
-					paystub.
+					Reschedule or remove your paystub from <strong>{paystubRecord.paystub.issuer}</strong>
 				</p>
 
 				<form
