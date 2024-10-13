@@ -72,14 +72,16 @@
 			<div class="space-y-2">
 				{#each data.upcomingPaystubs as upcomingPaystub}
 					<button
-						class="bg-gray-100 p-3 rounded-md shadow-sm hover:bg-gray-200 transition-colors text-left"
+						class="w-full bg-gray-100 p-3 rounded-md shadow-sm hover:bg-gray-200 transition-colors text-left"
 						on:click|preventDefault={() => {
 							paystubRecordToUpdate = upcomingPaystub;
 							showForm = true;
 						}}
 					>
+						<p class="text-sm text-gray-700 mb-1">
+							<strong class="font-medium">{ShortDate(upcomingPaystub.pay_date)}</strong>
+						</p>
 						<p class="text-sm text-gray-700">
-							<strong class="font-medium">{ShortDate(upcomingPaystub.pay_date)}</strong> -
 							{upcomingPaystub.paystub.issuer} -
 							<span class="font-semibold"
 								>{CentsToDollarsPretty(upcomingPaystub.amount_in_cents)}</span
