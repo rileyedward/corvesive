@@ -1,7 +1,9 @@
 import prisma from '$lib/server/database/db';
 import type { users } from '@prisma/client';
 
-export const load = async ({ locals }) => {
+export const load = async ({ locals, depends }) => {
+	depends('paystubs');
+
 	const user: users = locals.user;
 
 	const paystubs = await prisma.paystubs.findMany({

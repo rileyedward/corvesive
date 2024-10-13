@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { invalidate } from '$app/navigation';
 	import FormErrors from '$lib/components/FormErrors.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import type { ActionData } from './$types';
@@ -13,9 +14,13 @@
 
 <div>
 	<h1>Paystubs</h1>
+
+	<div>
+		{JSON.stringify(data.paystubs)}
+	</div>
 </div>
 
-<Modal title="New Paystub" show={showForm} close={() => showForm = false}>
+<Modal title="New Paystub" show={showForm} close={() => (showForm = false)}>
 	<div>
 		<p class="text-sm mb-6">Add a new paystub</p>
 
@@ -25,7 +30,8 @@
 			use:enhance={() => {
 				return async ({ result, update }) => {
 					if (result.type === 'success') {
-						return alert('Paystub created!');
+						invalidate('paystubs');
+						showForm = false;
 					}
 
 					update();
