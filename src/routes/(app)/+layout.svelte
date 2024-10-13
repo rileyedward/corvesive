@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
 	import DesktopNavbar from '$lib/components/navigation/DesktopNavbar.svelte';
 	import MobileNavbar from '$lib/components/navigation/MobileNavbar.svelte';
 
-	export let data: LayoutData;
+	export let data;
 
 	const navigation = [
 		{
