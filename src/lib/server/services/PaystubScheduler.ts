@@ -1,6 +1,6 @@
 import type { paystubs } from '@prisma/client';
 import dayjs from 'dayjs';
-import prisma from '../db';
+import prisma from '$lib/server/db';
 
 export async function scheduleFuturePaystubs(paystub: paystubs) {
 	if (paystub.recurrence_rate === 'monthly' || paystub.recurrence_rate === 'semi-monthly') {
