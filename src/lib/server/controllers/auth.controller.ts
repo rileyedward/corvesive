@@ -1,10 +1,13 @@
 import prisma from '$lib/server/db';
 import { type Cookies } from '@sveltejs/kit';
-import { LoginRequest, type TLoginRequest } from '../requests/login.request';
-import { RegistrationRequest, type TRegistrationRequest } from '../requests/register.request';
+import { LoginRequest, type TLoginRequest } from '$lib/server/requests/login.request';
+import {
+	RegistrationRequest,
+	type TRegistrationRequest
+} from '$lib/server/requests/register.request';
 import bcrypt from 'bcrypt';
-import { generateToken } from '../helpers/auth.helper';
-import { ServerError, ValidationErrors } from '../helpers/errors.helper';
+import { generateToken } from '$lib/server/helpers/auth.helper';
+import { ServerError, ValidationErrors } from '$lib/server/helpers/errors.helper';
 import type { TApiResponse } from '$lib/types/api.type';
 
 export async function Register(

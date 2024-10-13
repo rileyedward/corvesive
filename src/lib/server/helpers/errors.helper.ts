@@ -18,3 +18,9 @@ export function ServerError(): TApiError {
 		message: 'An error occurred'
 	});
 }
+
+export function AuthorizationError(): TApiError {
+	return fail(403, {
+		message: 'Unauthorized'
+	});
+}

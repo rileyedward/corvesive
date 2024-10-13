@@ -32,7 +32,7 @@ model paystubs {
   amount_in_cents         Int
   recurrence_rate         String
   recurrence_interval_one Int
-  recurrence_interval_two Int
+  recurrence_interval_two Int?
   created_at              DateTime @default(now())
   updated_at              DateTime @default(now()) @updatedAt
 }
