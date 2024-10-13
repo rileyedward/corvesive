@@ -32,7 +32,7 @@ export async function UpdatePaystubRecord(
 			id: paystubRecord.id
 		},
 		data: {
-			pay_date: payload.pay_date,
+			pay_date: new Date(payload.pay_date),
 			amount_in_cents: payload.amount_in_cents
 		}
 	});

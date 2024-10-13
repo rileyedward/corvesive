@@ -11,6 +11,7 @@ export type TPaystubRequest = {
 };
 
 export type TUpdatePaystubRequest = {
+	paystub_record_id: number;
 	pay_date: Date;
 	amount_in_cents: number;
 };
@@ -24,7 +25,7 @@ export const PaystubSchema = z.object({
 });
 
 export const UpdatePaystubSchema = z.object({
-	pay_date: z.date(),
+	pay_date: z.string().date(),
 	amount_in_cents: z.number().int().positive()
 });
 

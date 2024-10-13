@@ -4,15 +4,17 @@
 	import { DayOfWeek, ShortDate } from '$lib/helpers/DateHelper';
 	import type { paystubs, paystub_records } from '@prisma/client';
 	import type { ActionData } from './$types';
+	import type { ActionData as RecordActionData } from './records/$types';
 	import UpdatePaystubForm from '$lib/components/paystubs/UpdatePaystubForm.svelte';
 	import PaystubRecordForm from '$lib/components/paystubs/PaystubRecordForm.svelte';
 
 	export let data;
 	export let form: ActionData;
+	export let updateForm: RecordActionData;
 
 	let showForm: boolean = false;
 	let paystubToUpdate: paystubs | null = null;
-	let paystubRecordToUpdate: paystub_records & { paystub: paystubs } | null = null;
+	let paystubRecordToUpdate: (paystub_records & { paystub: paystubs }) | null = null;
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
@@ -97,7 +99,7 @@
 {#if paystubToUpdate}
 	<UpdatePaystubForm {form} bind:showForm bind:paystub={paystubToUpdate} />
 {:else if paystubRecordToUpdate}
-	<PaystubRecordForm {form} bind:showForm bind:paystubRecord={paystubRecordToUpdate} />
+	<PaystubRecordForm form={updateForm} bind:showForm bind:paystubRecord={paystubRecordToUpdate} />
 {:else}
 	<CreatePaystubForm {form} bind:showForm />
 {/if}

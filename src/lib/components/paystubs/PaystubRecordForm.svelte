@@ -29,7 +29,7 @@
 
 				<form
 					method="POST"
-					action="#"
+					action="/paystubs/records?/unschedule"
 					use:enhance={() => {
 						return async ({ result, update }) => {
 							if (result.type === 'success') {
@@ -50,7 +50,7 @@
 			<form
 				class="space-y-4"
 				method="POST"
-				action="#"
+				action="/paystubs/records?/update"
 				use:enhance={() => {
 					return async ({ result, update }) => {
 						if (result.type === 'success') {
