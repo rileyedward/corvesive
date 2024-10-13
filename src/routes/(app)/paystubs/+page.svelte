@@ -18,10 +18,10 @@
 <div class="flex flex-col md:flex-row justify-between items-start gap-4">
 	<div class="w-full md:w-full">
 		<div class="flex justify-between items-center mb-6">
-			<h1 class="text-2xl font-semibold">Paystubs</h1>
+			<h1 class="text-xl font-semibold">Paystubs</h1>
 			<button
 				on:click|preventDefault={() => (showForm = true)}
-				class="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white hover:bg-gray-600 transition-colors"
+				class="w-6 h-6 flex items-center justify-center rounded-full bg-black text-white hover:bg-gray-600 transition-colors"
 			>
 				<span class="text-xl">+</span>
 			</button>
