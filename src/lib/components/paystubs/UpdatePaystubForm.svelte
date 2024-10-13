@@ -6,6 +6,7 @@
 	import { CentsToDollars } from '$lib/helpers/CurrencyHelper';
 	import TrashIcon from '$lib/icons/TrashIcon.svelte';
 	import type { paystubs } from '@prisma/client';
+	import RemoveButton from '../RemoveButton.svelte';
 
 	export let paystub: paystubs | null;
 	export let form;
@@ -45,9 +46,7 @@
 					}}
 				>
 					<input type="hidden" name="paystub_id" value={paystub.id} />
-					<button type="submit">
-						<TrashIcon />
-					</button>
+					<RemoveButton />
 				</form>
 			</div>
 
