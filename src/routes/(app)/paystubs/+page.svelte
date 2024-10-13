@@ -62,9 +62,9 @@
 		{#if data.upcomingPaystubs && data.upcomingPaystubs.length > 0}
 			<div class="space-y-2">
 				{#each data.upcomingPaystubs as upcomingPaystub}
-					<div class="bg-gray-100 p-3 rounded-md shadow-sm">
+					<div class="bg-gray-100 p-3 rounded-md shadow-sm hover:bg-gray-200 transition-colors">
 						<p class="text-sm text-gray-700">
-							<strong>{ShortDate(upcomingPaystub.pay_date)}</strong> -
+							<strong class="font-medium">{ShortDate(upcomingPaystub.pay_date)}</strong> -
 							{upcomingPaystub.paystub.issuer} -
 							<span class="font-semibold"
 								>{CentsToDollarsPretty(upcomingPaystub.amount_in_cents)}</span
