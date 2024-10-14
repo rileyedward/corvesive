@@ -1,1 +1,3 @@
 # Corvesive
+
+Simplify your budgeting.
