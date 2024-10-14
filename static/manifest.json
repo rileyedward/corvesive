@@ -2,7 +2,7 @@
 	"name": "Corvesive",
 	"description": "Simplify your budgeting",
 	"display": "standalone",
-	"start_url": "/",
+	"start_url": "/dashboard",
 	"icons": [
 		{
 			"src": "icons/logo.png",
