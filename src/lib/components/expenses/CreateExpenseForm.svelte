@@ -6,6 +6,11 @@
 
 	export let form;
 	export let showForm: boolean;
+
+	let isVariable: boolean = false;
+	let dueDayOfMonth: number | null = null;
+
+	$: dueDayOfMonth = !isVariable ? null : 28;
 </script>
 
 <Modal title="Add new expense" show={showForm} close={() => (showForm = false)}>
@@ -41,18 +46,18 @@
 			</div>
 
 			<div>
-				<label for="due_day_of_month">Due Day of Month</label>
-				<input name="due_day_of_month" class="w-full" />
-			</div>
-
-			<div>
 				<label for="amount_in_cents">Amount</label>
 				<input name="amount_in_cents" class="w-full" />
 			</div>
 
 			<div>
 				<label for="is_variable">Is Variable</label>
-				<input type="checkbox" name="is_variable" />
+				<input type="checkbox" name="is_variable" bind:checked={isVariable} />
+			</div>
+
+			<div>
+				<label for="due_day_of_month">Due Day of Month</label>
+				<input name="due_day_of_month" class="w-full" bind:value={dueDayOfMonth} />
 			</div>
 
 			<FormErrors {form} />
