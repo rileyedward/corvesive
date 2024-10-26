@@ -5,7 +5,7 @@ import type { Cookies } from '@sveltejs/kit';
 
 export async function generateToken(user: users, cookies: Cookies): Promise<void> {
 	const secret = 'secret';
-	const token = jwt.sign({ user }, secret, { expiresIn: '1h' });
+	const token = jwt.sign({ user }, secret, { expiresIn: '8h' });
 
 	cookies.set('corvesive_token', token, { path: '/' });
 
