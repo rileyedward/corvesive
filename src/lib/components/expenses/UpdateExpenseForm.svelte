@@ -79,18 +79,12 @@
 
 				<div>
 					<label for="due_day_of_month">Due Day of Month</label>
-					<input
-						type="number"
-						name="due_day_of_month"
-						class="w-full"
-						value={expense.due_day_of_month}
-					/>
+					<input name="due_day_of_month" class="w-full" value={expense.due_day_of_month} />
 				</div>
 
 				<div>
 					<label for="amount_in_cents">Amount</label>
 					<input
-						type="number"
 						name="amount_in_cents"
 						class="w-full"
 						value={CentsToDollars(expense.amount_in_cents)}

@@ -38,7 +38,7 @@
 
 			<div>
 				<label for="amount_in_cents">Amount</label>
-				<input type="number" name="amount_in_cents" class="w-full" />
+				<input name="amount_in_cents" class="w-full" />
 			</div>
 
 			<div>

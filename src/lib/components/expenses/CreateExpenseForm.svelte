@@ -42,12 +42,12 @@
 
 			<div>
 				<label for="due_day_of_month">Due Day of Month</label>
-				<input type="number" name="due_day_of_month" class="w-full" />
+				<input name="due_day_of_month" class="w-full" />
 			</div>
 
 			<div>
 				<label for="amount_in_cents">Amount</label>
-				<input type="number" name="amount_in_cents" class="w-full" />
+				<input name="amount_in_cents" class="w-full" />
 			</div>
 
 			<div>
