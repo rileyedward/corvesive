@@ -5,9 +5,7 @@
 </script>
 
 {#if show}
-	<button type="submit">
-		<TrashIcon textColor="text-red-500" />
-	</button>
+	<button type="submit" class="btn btn-danger btn-small"> Delete </button>
 {:else}
 	<button type="button" on:click|preventDefault={() => (show = true)}>
 		<TrashIcon />

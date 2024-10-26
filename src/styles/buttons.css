@@ -2,6 +2,10 @@
 	@apply px-5 py-2.5 rounded-full inline-flex items-center justify-center transition-all duration-200 ease-in-out;
 }
 
+.btn-small {
+	@apply px-2 py-1 text-sm;
+}
+
 .btn-primary {
 	@apply bg-black text-white;
 }
@@ -26,4 +30,13 @@
 .btn-secondary:focus,
 .btn-secondary:active {
 	@apply ring-2 ring-gray-400;
+}
+
+.btn-danger {
+	@apply bg-red-500 text-white;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+	@apply bg-red-600 shadow-lg transform scale-105;
 }
