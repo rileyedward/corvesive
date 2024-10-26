@@ -28,6 +28,14 @@ export async function removeFuturePaystubs(paystub: paystubs) {
 	});
 }
 
+export async function removeAllPaystubs(paystub: paystubs) {
+	await prisma.paystub_records.deleteMany({
+		where: {
+			paystub_id: paystub.id
+		}
+	});
+}
+
 async function generateMonthlyPaystubs(paystub: paystubs) {
 	for (let i = 0; i < 12; i++) {
 		const payDate = dayjs()

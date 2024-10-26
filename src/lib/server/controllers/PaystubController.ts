@@ -3,7 +3,7 @@ import prisma from '$lib/server/database/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import { PaystubRequest, type TPaystubRequest } from '$lib/server/requests/PaystubRequest';
 import {
-	removeFuturePaystubs,
+	removeAllPaystubs,
 	rescheduleFuturePaystubs,
 	scheduleFuturePaystubs
 } from '$lib/server/services/PaystubScheduler';
@@ -92,7 +92,7 @@ export async function DeletePaystub(paystub_id: number, user_id: number): Promis
 		return AuthorizationError();
 	}
 
-	await removeFuturePaystubs(paystub);
+	await removeAllPaystubs(paystub);
 
 	await prisma.paystubs.delete({
 		where: {

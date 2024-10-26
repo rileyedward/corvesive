@@ -36,3 +36,11 @@ export async function removeFutureExpenses(expense: expenses) {
 		}
 	});
 }
+
+export async function removeAllExpenses(expense: expenses) {
+	await prisma.expense_records.deleteMany({
+		where: {
+			expense_id: expense.id
+		}
+	});
+}

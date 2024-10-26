@@ -3,7 +3,7 @@ import type { TApiResponse } from '$lib/types/ApiTypes';
 import prisma from '$lib/server/database/db';
 import { AuthorizationError, ValidationErrors } from '$lib/server/helpers/ErrorHelper';
 import {
-	removeFutureExpenses,
+	removeAllExpenses,
 	rescheduleFutureExpenses,
 	scheduleFutureExpenses
 } from '$lib/server/services/ExpenseScheduler';
@@ -90,7 +90,7 @@ export async function DeleteExpense(expense_id: number, user_id: number): Promis
 		return AuthorizationError();
 	}
 
-	await removeFutureExpenses(expense);
+	await removeAllExpenses(expense);
 
 	await prisma.expenses.delete({
 		where: {
