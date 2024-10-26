@@ -20,7 +20,7 @@ export const actions = {
 		const payload = (await FormPayload(request)) as TPaystubRequest;
 
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 		payload.recurrence_interval_one = parseInt(
 			payload.recurrence_interval_one as unknown as string
@@ -35,7 +35,7 @@ export const actions = {
 
 		payload.paystub_id = parseInt(payload.paystub_id as unknown as string);
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 		payload.recurrence_interval_one = parseInt(
 			payload.recurrence_interval_one as unknown as string
@@ -57,7 +57,7 @@ export const actions = {
 
 		payload.paystub_record_id = parseInt(payload.paystub_record_id as unknown as string);
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 
 		return await UpdatePaystubRecord(payload, payload.paystub_record_id, locals.user.id);
