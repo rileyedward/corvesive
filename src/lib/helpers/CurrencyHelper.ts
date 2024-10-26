@@ -1,5 +1,8 @@
 export function CentsToDollars(cents: number): string {
-	return (cents / 100).toFixed(2);
+	return (cents / 100).toLocaleString('en-US', {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2
+	});
 }
 
 export function CentsToDollarsPretty(cents: number): string {
@@ -7,5 +10,5 @@ export function CentsToDollarsPretty(cents: number): string {
 }
 
 export function DollarsToCents(dollars: number): number {
-	return dollars * 100;
+	return Math.round(dollars * 100);
 }
