@@ -17,7 +17,7 @@ export const actions = {
 		const payload = (await FormPayload(request)) as TExpenseRequest;
 
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 		payload.due_day_of_month = parseInt(payload.due_day_of_month as unknown as string);
 
@@ -28,7 +28,7 @@ export const actions = {
 
 		payload.expense_id = parseInt(payload.expense_id as unknown as string);
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 		payload.due_day_of_month = parseInt(payload.due_day_of_month as unknown as string);
 
@@ -46,7 +46,7 @@ export const actions = {
 
 		payload.expense_record_id = parseInt(payload.expense_record_id as unknown as string);
 		payload.amount_in_cents = DollarsToCents(
-			parseInt(payload.amount_in_cents as unknown as string)
+			parseFloat(payload.amount_in_cents as unknown as string)
 		);
 
 		return await UpdateExpenseRecord(payload, payload.expense_record_id, locals.user.id);
