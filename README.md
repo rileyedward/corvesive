@@ -1,6 +1,22 @@
 # Corvesive
 
+Simplify your budgeting.
+
+## Overview
+
+### What is Corvesive?
+
 Corvesive is an online application designed to simplify your budgeting. Track your income by uploading pay stubs, record your monthly expenses, and effortlessly monitor where your money is going and how much you have left. Gain clarity on your financial situation to make better budgeting decisions.
+
+### Why Use Corvesive?
+
+Budgeting can often feel like a daunting task, especially when income sources and expenses are scattered across different platforms and tools. Corvesive brings everything together in one intuitive platform, making it easier than ever to manage your finances. With Corvesive, you can gain a clear understanding of your financial health by tracking income, categorizing expenses, and monitoring your remaining balance.
+
+### Key Features
+
+- **Income Manager**: Upload paystubs and keep a record of all your incoming income sources.
+- **Expense Manager**: Record monthly expenses and categrorize them for easy tracking.
+- **Spending Insights**: Visualize where your month is going to make informed budgeting decisions.
 
 ## Getting Started
 
